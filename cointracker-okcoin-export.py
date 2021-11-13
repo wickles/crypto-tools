@@ -2,6 +2,7 @@ import datetime
 import json
 import logging
 import csv
+import configparser
 
 import sys
 sys.path.append('ext/okcoin-V3-Open-API-SDK/okcoin-python-sdk-api')
@@ -30,10 +31,13 @@ def format_date(timestamp):
 time = get_timestamp()
 
 if __name__ == '__main__':
-    # fill in API credentials here
-    api_key = ""
-    secret_key = ""
-    passphrase = ""
+    # load credentials from config
+    config = configparser.ConfigParser()
+    config.read('credentials.ini')
+    # credentials
+    api_key = config['okcoin']['api_key']
+    secret_key = config['okcoin']['secret_key']
+    passphrase = config['okcoin']['passphrase']
     '''
      param use_server_time's value is False if is True will use server timestamp
     '''

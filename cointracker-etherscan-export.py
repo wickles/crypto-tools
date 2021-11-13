@@ -1,8 +1,12 @@
 import requests
 import json
+import configparser
 
-# insert credentials here
-address=""
+# load credentials from config
+config = configparser.ConfigParser()
+config.read('credentials.ini')
+# credentials
+address=config['evm']['address']
 api_key="YourApiKeyToken"
 
 # urls for requests
