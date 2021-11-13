@@ -3,10 +3,12 @@ import json
 
 # insert credentials here
 address=""
+api_key="YourApiKeyToken"
 
 # urls for requests
-url_normal="https://api.arbiscan.io/api?module=account&action=txlist&address={}&sort=asc&apikey=YourApiKeyToken".format(address)
-url_erc20="https://api.arbiscan.io/api?module=account&action=tokentx&address={}&sort=asc&apikey=YourApiKeyToken".format(address)
+url_base="https://api.arbiscan.io"
+url_normal="{}/api?module=account&action=txlist&address={}&sort=asc&apikey={}".format(url_base, address, api_key)
+url_erc20="{}/api?module=account&action=tokentx&address={}&sort=asc&apikey={}".format(url_base, address, api_key)
 
 # normal transactions
 #response = requests.get(url_normal)
