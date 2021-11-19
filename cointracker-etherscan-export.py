@@ -1,5 +1,6 @@
 import requests
 import json
+import csv
 import configparser
 import datetime
 
@@ -16,6 +17,10 @@ api_key = "YourApiKeyToken"
 # urls for requests
 url_normal="{}/api?module=account&action=txlist&address={}&sort=asc&apikey={}".format(url_base, address, api_key)
 url_erc20="{}/api?module=account&action=tokentx&address={}&sort=asc&apikey={}".format(url_base, address, api_key)
+
+csvfile = open('trades.csv', 'w', newline='')
+writer = csv.writer(csvfile)
+writer.writerow(['Date', 'Received Quantity', 'Received Currency', 'Sent Quantity', 'Sent Currency', 'Fee Amount', 'Fee Currency', 'Tag'])
 
 # normal transactions
 response = requests.get(url_normal)
@@ -40,5 +45,11 @@ for item in response.json()["result"]:
     value_proper = int(item['value']) * pow(10, -decimals)
     gas_proper = int(item['gasUsed']) * int(item['gasPrice']) * pow(10, -decimals) * 0.5
     symbol = item['tokenSymbol']
-    dir = 'in ' if item['to'].casefold() == address.casefold() else 'out'
-    print("{}: {}, {}, {}, {}, {}".format(dir, timestamp, value_proper, symbol, gas_proper, gas_token))
+
+    # dir = 'in ' if item['to'].casefold() == address.casefold() else 'out'
+    # print("{}: {}, {}, {}, {}, {}".format(dir, timestamp, value_proper, symbol, gas_proper, gas_token))
+
+    if item['to'].casefold() == address.casefold(): #received
+        writer.writerow([timestamp, value_proper, symbol, '', '', gas_proper, gas_token, ''])
+    # else: # sent
+    #     writer.writerow([timestamp, '', '', value_proper, symbol, gas_proper, gas_token, ''])
