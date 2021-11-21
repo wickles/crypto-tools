@@ -25,7 +25,7 @@ writer.writerow(['Date', 'Received Quantity', 'Received Currency', 'Sent Quantit
 # normal transactions
 response = requests.get(url_normal)
 for item in response.json()["result"]:
-    # Relevant keys: timeStamp, from, to, value, tokenDecimal, tokenSymbol, gasPrice, gasUsed
+    # Relevant keys: timeStamp, from, to, value, tokenDecimal, tokenSymbol, gasPrice, gasUsed, input
     if (int(item['value']) == 0): continue
     decimals = gas_decimal
     timestamp = datetime.datetime.utcfromtimestamp(int(item['timeStamp'])).strftime('%Y-%m-%d %H:%M:%S')

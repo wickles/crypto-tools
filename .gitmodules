@@ -1,3 +1,4 @@
 [submodule "okcoin-V3-Open-API-SDK"]
 	path = ext/okcoin-V3-Open-API-SDK
 	url = https://github.com/okcoin-com/V3-Open-API-SDK
+	ignore = dirty
