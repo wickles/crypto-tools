@@ -9,11 +9,10 @@ config = configparser.ConfigParser()
 config.read('credentials.ini')
 # credentials
 address = config['evm']['address']
+api_key = config['evm']['api_key']
 url_base = config['evm']['scan_url']
 gas_token = config['evm']['gas_token']
 gas_decimal = int(config['evm']['gas_decimal'])
-# TODO: take API key in credentials file
-api_key = "YourApiKeyToken"
 
 # urls for requests
 url_erc20="{}/api?module=account&action=tokentx&address={}&sort=asc&apikey={}".format(url_base, address, api_key)
